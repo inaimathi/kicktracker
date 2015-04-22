@@ -17,12 +17,14 @@
   (kick "/discover/recently-launched?format=json"))
 (defn ending-soon []
   (kick "/discover/ending-soon?format=json"))
-(defn by-category []
-  (kick "/discover/advanced?category_id=20&sort=end_date"))
 (defn staff-picks []
   (kick "/discover/recommended?format=json"))
 (defn specific [search-term]
   (kick (str "/projects/search.json?search=&term=" (URLEncoder/encode search-term))))
+
+;; 1 = Art, 15 = Photography, 34 = tabletop games
+(defn by-category [category]
+  (kick (str "/discover/advanced?category_id=" category "&sort=end_date")))
 
 (defn gets [map & keys]
   (reduce (fn [memo k] (get memo k)) map keys))
