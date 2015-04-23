@@ -1,6 +1,8 @@
 # kicktracker
 
-A Clojure library designed to ... well, that part is up to you.
+I'm sick of [missing](https://www.kickstarter.com/projects/maydaygames/viceroy-fantasy-pyramid-card-board-game-1-4-player?ref=nav_search) interesting [game](https://www.kickstarter.com/projects/dicehateme/big-games-for-small-pockets-dice-hate-mes-54-card?ref=nav_search) projects [on Kickstarter](https://www.kickstarter.com/projects/fowers/paperback-a-novel-deckbuilding-game/description).
+
+So I made this. I may deploy it somewhere at some point.
 
 ## Usage
 
