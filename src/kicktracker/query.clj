@@ -15,7 +15,7 @@
    :category (gets proj "category" "name")
    :name (proj "name")
    :blurb (proj "blurb")
-   :pic (gets proj "photo" "little")
+   :pic (gets proj "photo" "med")
    :creator (gets proj "creator" "name")})
 
 (defn kick [path]
