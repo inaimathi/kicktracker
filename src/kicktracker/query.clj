@@ -20,7 +20,9 @@
 
 (defn kick [path]
   (let [res (client/get (str "http://www.kickstarter.com" path))]
-    (set (map query-project ((json/parse-string (@res :body)) "projects")))))
+    (set (map query-project 
+              (filter (fn [p] (= "live" (p "state")))
+                      ((json/parse-string (@res :body)) "projects"))))))
 
 (defn recently-launched [] 
   (kick "/discover/recently-launched?format=json"))

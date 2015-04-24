@@ -41,7 +41,7 @@
     [:h1 "Kicktracker"]
     [:h3 [:i "The kickstarter RSS feed"]]
     [:p "I got sick of missing interesting game projects on Kickstarter, so I made this."]
-    [:p "There are a number of ATOM feeds you can subscribe to here, all sorted by start-date starting from the most recent:"]
+    [:p "There are a number of ATOM feeds you can subscribe to. All are sorted by descending order of launch-date, and include only live projects."]
     [:ul 
      [:li [:a {:href "/recently-launched"} [:b [:code "/recently-launched"]]] " - covers all recently launched projects. This one tends to move pretty fast."]
      [:li [:a {:href "/staff-picks"} [:b [:code "/staff-picks"]]] " - covers the projects hand-picked by the Kickstarter staff."]

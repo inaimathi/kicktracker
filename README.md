@@ -22,7 +22,7 @@ It's an RSS feed server, so just go it and pick a feed. It's currently running a
 	- [`/custom/ryan laukat`](http://kicktracker.inaimathi.ca/custom/ryan laukat) *(the feed for Red Raven games)*
 	- [`/custom/robot`](http://kicktracker.inaimathi.ca/custom/robot) *(the feed for robots and robot-related stuff)*
 
-All feeds are sorted in descending order of launch-date.
+All feeds are sorted in descending order of launch-date. Only live projects are shown.
 
 #### Server
 
@@ -38,7 +38,6 @@ You can specify the listening port in that last step by passing it as an argumen
 	- one, we generate more traffic than we ought to
 	- two, we may miss projects depending on how requests are timed.
 	Some kind of caching mechanism solves the first one. Not sure how to solve the second outside of heartbeat requests.
-- Filter projects that aren't still open (the point is to catch projects I'd like to kick, not find out about them after the fact)
 - Figure out how to get images working properly in ATOM feeds
 
 ## License
