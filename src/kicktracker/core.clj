@@ -27,7 +27,7 @@
                       [:title (html-escape (p :name))] [:link {:href (p :url)}] [:id (str "project-" (p :id))]
                       [:updated (clj-time.coerce/from-long (p :launched-at))]
                       [:summary (html-escape (p :blurb))]
-                      [:content {:type "html"} [:img {:src (p :pic)}]]
+                      ;; [:content {:type "html"} [:img {:src (p :pic)}]]
                       [:author [:name (html-escape (p :creator))]]])
                    ps)])))})
 
@@ -61,9 +61,9 @@
       "/board-games" (projects->feed 
                       "Boardgames" "Recently launched tabletop game projects" 
                       (clojure.set/union 
-                       (q/search "tabletop+game")
-                       (q/search "board+game")
-                       (q/search "card+game")
+                       (q/search "tabletop game")
+                       (q/search "board game")
+                       (q/search "card game")
                        (q/by-category (q/category :board-games))))
       (cond 
         (.startsWith uri "/by-category/id/") (let [[_ num-str] (re-find #"/by-category/id/(\d+)" uri)
