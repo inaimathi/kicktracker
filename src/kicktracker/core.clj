@@ -27,7 +27,6 @@
                       [:title (html-escape (p :name))] [:link {:href (p :url)}] [:id (str "project-" (p :id))]
                       [:updated (clj-time.coerce/from-long (p :launched-at))]
                       [:summary (html-escape (p :blurb))]
-                      ;; [:content {:type "html"} [:img {:src (p :pic)}]]
                       [:author [:name (html-escape (p :creator))]]])
                    ps)])))})
 
@@ -40,7 +39,7 @@
    [:body
     [:h1 "Kicktracker"]
     [:h3 [:i "The kickstarter RSS feed"]]
-    [:p "I got sick of missing interesting game projects on Kickstarter, so I made this."]
+    [:p "I got sick of missing interesting game projects on Kickstarter, so I made this. Source available " [:a {:href "https://github.com/Inaimathi/kicktracker"} "on " [:code "github"]] "."]
     [:p "There are a number of ATOM feeds you can subscribe to. All are sorted by descending order of launch-date, and include only live projects."]
     [:ul 
      [:li [:a {:href "/recently-launched"} [:b [:code "/recently-launched"]]] " - covers all recently launched projects. This one tends to move pretty fast."]
