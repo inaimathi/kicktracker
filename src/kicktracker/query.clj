@@ -9,7 +9,7 @@
 
 (defn query-project [proj]
   {:id (proj "id")
-   :url (gets proj "urls" "web" "project")
+   :url (get (clojure.string/split (gets proj "urls" "web" "project") #"\?") 0)
    :launched-at (* (proj "launched_at") 1000)
    :deadline (* (proj "deadline") 1000)
    :category (gets proj "category" "name")
@@ -28,8 +28,20 @@
   (kick "/discover/ending-soon?format=json"))
 (defn staff-picks []
   (kick "/discover/recommended?format=json"))
-(defn specific [search-term]
-  (kick (str "/projects/search.json?search=&term=" (URLEncoder/encode search-term))))
+(defn raw-search [search-term]
+  (kick (str "/projects/search.json?search=&term=" search-term)))
+(defn search [search-term] 
+  (raw-search (URLEncoder/encode search-term)))
+
+(def category 
+  {:art 1
+   :accessories 2
+   :comics 3
+   :photography 15
+   :board-games 34})
+
+(defn by-category [category-id]
+  (kick (str "/discover/advanced?category_id=" category-id "&sort=newest&format=json")))
 
 ;;;;;;;;;; Sample raw project map
 ;; {"launched_at" 1394151758, 

@@ -4,6 +4,7 @@
             [hiccup.core :as hic]
             [kicktracker.query :as q]
             clj-time.coerce)
+  (:import [java.net URLDecoder])
   (:gen-class))
 
 ;;;;;;;;;; Feed emission
@@ -30,12 +31,25 @@
 
 ;;;;;;;;;; Handlers
 (defn handler [req]
-  (let [body (case (req :uri)
+  (let [uri (req :uri)
+        body (case uri
                ("/" "/recently-launched") (projects->feed "Recent" "All recently launched projects" (q/recently-launched))
                "/staff-picks" (projects->feed "Picks" "Recent KS staff picks" (q/staff-picks))
-               "/board-games" (projects->feed "Boardgames" "Recently launched tabletop game projects" 
-                                              (clojure.set/union (q/specific "tabletop game") (q/specific "board game")))
-               nil)]
+               "/board-games" (projects->feed 
+                               "Boardgames" "Recently launched tabletop game projects" 
+                               (clojure.set/union 
+                                (q/search "tabletop+game")
+                                (q/search "board+game")
+                                (q/by-category (q/category :board-games))))
+               (cond 
+                 (.startsWith uri "/by-category/id/") (let [[_ num-str] (re-find #"/by-category/id/(\d+)" uri)
+                                                            num (Integer. num-str)]
+                                                        (projects->feed "Category Feed" (str "category feed for ID:" num-str) (q/by-category num)))
+                 (.startsWith uri "/custom/") (let [[match term] (re-find #"/custom/(.+)" uri)]
+                                                (projects->feed 
+                                                 "Custom Feed" (str "feed for the search term \"" (URLDecoder/decode term) "\"")
+                                                 (q/raw-search term)))
+                 :else nil))]
     (if body
       {:status 200
        :headers {"Content-Type" "application/atom+xml"}
