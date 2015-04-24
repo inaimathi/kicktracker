@@ -40,9 +40,10 @@ You can specify the listening port in that last step by passing it as an argumen
 	Some kind of caching mechanism solves the first one. Not sure how to solve the second outside of heartbeat requests.
 - Figure out how to get images working properly in ATOM feeds
 
-## License
+## License & Thanks
 
-Copyright © 2015 FIXME
+Copyright © 2015 Inaimathi
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+
+- Thanks to the [kickscraper project](https://github.com/markolson/kickscraper), which includes [this](https://github.com/markolson/kickscraper/issues/16#issuecomment-31409151) mildly outdated, but still very helpful starting point on interacting with the KS API.
