@@ -12,13 +12,15 @@ It's currently deployed and running at [kicktracker.inaimathi.ca](http://kicktra
 
 It's an RSS feed server, so just go it and pick a feed. It's currently running at [kicktracker.inaimathi.ca](http://kicktracker.inaimathi.ca). Among the feeds you can subscribe to are:
 
-- `/recently-launched`
-- `/staff-picks`
-- `/board-games`
+- [`/recently-launched`](http://kicktracker.inaimathi.ca/recently-launched)
+- [`/staff-picks`](http://kicktracker.inaimathi.ca/staff-picks)
+- [`/board-games`](http://kicktracker.inaimathi.ca/staff-picks)
 - `/by-category/id/<category-id>`
+	- For example:
 	- [`/by-category/id/15`](http://kicktracker.inaimathi.ca/by-category/id/15) *(the feed for Photography)*
 	- [`/by-category/id/3`](http://kicktracker.inaimathi.ca/by-category/id/3) *(the feed for Comics)*
 - `/custom/<search-term>`
+	- For example:
 	- [`/custom/ryan laukat`](http://kicktracker.inaimathi.ca/custom/ryan laukat) *(the feed for Red Raven games)*
 	- [`/custom/robot`](http://kicktracker.inaimathi.ca/custom/robot) *(the feed for robots and robot-related stuff)*
 
@@ -27,10 +29,11 @@ All feeds are sorted in descending order of launch-date. Only live projects are 
 #### Server
 
 - Clone this repo and `cd` into it
-- Run `lein uberjar`
-- Run `java -jar target/kicktracker*standalone.jar`
+- Either
+	- Run `lein uberjar`, then `java -jar target/kicktracker*standalone.jar`
+	- Run `lein run`
 
-You can specify the listening port in that last step by passing it as an argument. The default port is `8000`. For instance, `java -jar target/kicktracker*standalone.jar 8484` listens on port `8484` instead of the default.
+You can specify the listening port in that last step by passing it as an argument. For instance, `java -jar target/kicktracker*standalone.jar 8484` and `lein run 8484` both listen on port `8484` instead of the default. The default port is `8000`.
 
 ## TODO
 
