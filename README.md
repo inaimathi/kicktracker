@@ -10,7 +10,7 @@ It's currently deployed and running at [kicktracker.inaimathi.ca](http://kicktra
 
 #### Client
 
-It's an RSS feed server, so just go it and pick a feed. It's currently running at [kicktracker.inaimathi.ca](http://kicktracker.inaimathi.ca). Among the feeds you can subscribe to are:
+It's an RSS feed server, so just go to it and pick a feed. It's currently running at [kicktracker.inaimathi.ca](http://kicktracker.inaimathi.ca). Among the feeds you can subscribe to are:
 
 - [`/recently-launched`](http://kicktracker.inaimathi.ca/recently-launched)
 - [`/staff-picks`](http://kicktracker.inaimathi.ca/staff-picks)
