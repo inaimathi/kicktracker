@@ -45,7 +45,7 @@ You can specify the listening port in that last step by passing it as an argumen
 
 ## License & Thanks
 
-Copyright © 2015 Inaimathi
+Copyright © 2015 inaimathi
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
 
