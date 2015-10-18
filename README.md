@@ -1,6 +1,6 @@
 # kicktracker
 
-![First World Problems - There are so many interesting projects on Kickstarter that I miss some of them](https://imgflip.com/i/sqndh)
+![First World Problems - There are so many interesting projects on Kickstarter that I miss some of them](https://raw.githubusercontent.com/Inaimathi/kicktracker/master/doc/firstworldproblems.jpg)
 
 I'm sick of [missing](https://www.kickstarter.com/projects/maydaygames/viceroy-fantasy-pyramid-card-board-game-1-4-player?ref=nav_search) interesting [game](https://www.kickstarter.com/projects/dicehateme/big-games-for-small-pockets-dice-hate-mes-54-card?ref=nav_search) projects [on Kickstarter](https://www.kickstarter.com/projects/fowers/paperback-a-novel-deckbuilding-game/description).
 
