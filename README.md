@@ -43,7 +43,6 @@ You can specify the listening port in that last step by passing it as an argumen
 	- one, we generate more traffic than we ought to
 	- two, we may miss projects depending on how requests are timed.
 	Some kind of caching mechanism solves the first one. Not sure how to solve the second outside of heartbeat requests.
-- Figure out how to get images working properly in ATOM feeds
 
 ## License & Thanks
 
