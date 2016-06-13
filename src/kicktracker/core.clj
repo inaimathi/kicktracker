@@ -2,6 +2,7 @@
   (:require [org.httpkit.server :as server]
             [hiccup.page :as pg]
             [hiccup.core :as hic]
+            [hiccup.util :as util]
             [kicktracker.query :as q]
             clj-time.coerce)
   (:import [java.net URLDecoder])
@@ -17,17 +18,23 @@
    :body (let [ps (sort-by :launched-at > projects)]
            (str "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
                 (hic/html
-                 [:feed {:xmlns "http://www.w3.org/2005/Atom"}
+                 [:feed {:xml:lang "en-US" :xmlns "http://www.w3.org/2005/Atom"}
                   [:title title] [:subtitle subtitle]
                   [:link {:href "http://kicktracker.inaimathi.ca/feed/atom" :rel "self"}]
                   [:link {:href "http://kicktracker.inaimathi.ca"}]
                   (map
                    (fn [p]
-                     [:entry 
+                     [:entry
                       [:title (html-escape (p :name))] [:link {:href (p :url)}] [:id (str "project-" (p :id))]
                       [:updated (clj-time.coerce/from-long (p :launched-at))]
-                      [:summary (html-escape (p :blurb))]
-                      [:author [:name (html-escape (p :creator))]]])
+                      [:author [:name (html-escape (p :creator))]]
+                      [:content {:type "html"}
+                       (util/escape-html
+                        (hic/html
+                         [:div
+                          [:a {:href (p :url)}
+                           [:img {:alt "Project image" :src (p :pic)}]]
+                          [:p (p :blurb)]]))]])
                    ps)])))})
 
 (defn home []
@@ -41,7 +48,7 @@
     [:h3 [:i "The kickstarter RSS feed"]]
     [:p "I got sick of missing interesting game projects on Kickstarter, so I made this. Source available " [:a {:href "https://github.com/Inaimathi/kicktracker"} "on " [:code "github"]] "."]
     [:p "There are a number of ATOM feeds you can subscribe to. All are sorted by descending order of launch-date, and include only live projects."]
-    [:ul 
+    [:ul
      [:li [:a {:href "/recently-launched"} [:b [:code "/recently-launched"]]] " - covers all recently launched projects. This one tends to move pretty fast."]
      [:li [:a {:href "/staff-picks"} [:b [:code "/staff-picks"]]] " - covers the projects hand-picked by the Kickstarter staff."]
      [:li [:a {:href "/board-games"} [:b [:code "/board-games"]]] " - covers most of the things I'm interested in. It's a combination of searches for \"tabletop game\", \"board game\", \"card game\" and category #34"]
@@ -54,22 +61,22 @@
     (case uri
       "/" {:status 200
            :headers {"Content-Type" "text/html"}
-           :body (home)} 
+           :body (home)}
       "/recently-launched" (projects->feed "Recent" "All recently launched projects" (q/recently-launched))
       "/staff-picks" (projects->feed "Picks" "Recent KS staff picks" (q/staff-picks))
-      "/board-games" (projects->feed 
-                      "Boardgames" "Recently launched tabletop game projects" 
-                      (clojure.set/union 
+      "/board-games" (projects->feed
+                      "Boardgames" "Recently launched tabletop game projects"
+                      (clojure.set/union
                        (q/search "tabletop game")
                        (q/search "board game")
                        (q/search "card game")
                        (q/by-category (q/category :board-games))))
-      (cond 
+      (cond
         (.startsWith uri "/by-category/id/") (let [[_ num-str] (re-find #"/by-category/id/(\d+)" uri)
                                                    num (Integer. num-str)]
                                                (projects->feed "Category Feed" (str "category feed for ID:" num-str) (q/by-category num)))
         (.startsWith uri "/custom/") (let [[match term] (re-find #"/custom/(.+)" uri)]
-                                       (projects->feed 
+                                       (projects->feed
                                         "Custom Feed" (str "feed for the search term \"" (URLDecoder/decode term) "\"")
                                         (q/raw-search term)))
         :else {:status 404
@@ -77,7 +84,7 @@
                :body "Nope, don't have that..."}))))
 
 ;;;;;;;;;; Main entry point
-(defn -main 
+(defn -main
   ([]     (-main "8000"))
   ([port]
    (prn (str "Listening on port " port))
