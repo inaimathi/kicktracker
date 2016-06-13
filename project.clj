@@ -10,4 +10,5 @@
                  [ring/ring-devel "1.3.2"]
                  [cheshire "5.4.0"]
                  [hiccup "1.0.5"]]
-  :main kicktracker.core)
+  :main kicktracker.core
+  :aot [kicktracker.core])
